@@ -1,0 +1,2 @@
+# KmmShareTest
+Kmm share sample
