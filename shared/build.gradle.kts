@@ -30,8 +30,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.badoo.reaktive:reaktive:1.2.0")
-                implementation("dev.icerock.moko:mvvm:0.11.0")
+                implementation ("org.reduxkotlin:redux-kotlin-threadsafe:0.5.5")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
                 implementation("io.ktor:ktor-client-core:1.6.0")
                 implementation("io.ktor:ktor-client-json:1.6.0")

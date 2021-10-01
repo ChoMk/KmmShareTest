@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SampleData(
-    val sampleText: String
+    val id: Int,
+    val name: String
 )

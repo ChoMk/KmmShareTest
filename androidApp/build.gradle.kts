@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-kapt")
     kotlin("android")
+    kotlin("android.extensions")
 }
 
 dependencies {
@@ -10,6 +11,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("dev.icerock.moko:mvvm:0.11.0")
+    implementation ("org.reduxkotlin:redux-kotlin-threadsafe:0.5.5")
+
 }
 
 android {

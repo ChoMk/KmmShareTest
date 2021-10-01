@@ -1,16 +1,30 @@
 package com.example.kmmsharetest.android
 
-import androidx.lifecycle.ViewModelProvider
-import com.example.kmmsharetest.android.databinding.ActivityMainBinding
-import com.example.kmmsharetest.viewmodel.SampleViewModel
-import dev.icerock.moko.mvvm.MvvmActivity
-import dev.icerock.moko.mvvm.createViewModelFactory
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.kmmsharetest.state.AppState
+import com.example.kmmsharetest.state.ClickFilter
+import com.example.kmmsharetest.state.ClickTestButton
+import com.example.kmmsharetest.state.rootReducer
+import kotlinx.android.synthetic.main.activity_main.*
+import org.reduxkotlin.StoreSubscription
+import org.reduxkotlin.createThreadSafeStore
 
-class MainActivity : MvvmActivity<ActivityMainBinding, SampleViewModel>() {
-    override val layoutId: Int = R.layout.activity_main
-    override val viewModelVariableId: Int = BR.viewmodel
-    override val viewModelClass: Class<SampleViewModel> = SampleViewModel::class.java
-    override fun viewModelFactory(): ViewModelProvider.Factory {
-        return createViewModelFactory { SampleViewModel() }
+val store = createThreadSafeStore(::rootReducer, AppState())
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var storeSubscription: StoreSubscription
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        click_button.setOnClickListener {
+            store.dispatch(ClickTestButton(ClickFilter.CLICKED))
+        }
+        storeSubscription = store.subscribe { render(store.state) }
+        render(store.state)
+    }
+
+    private fun render(state: AppState) {
+        event_result.text = state.resultText
     }
 }
